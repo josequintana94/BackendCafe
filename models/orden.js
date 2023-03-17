@@ -1,11 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const OrdenSchema = Schema({
-    /* estado: {
-        type: Boolean,
-        default: true,
-        required: true
-    },
+    /*
     usuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
@@ -15,6 +11,11 @@ const OrdenSchema = Schema({
         type: Number,
         default: 0
     },
+    activo: {
+        type: Boolean,
+        default: true,
+        required: true
+    ,}
     /* categoria: {
         type: Schema.Types.ObjectId,
         ref: 'Categoria',
