@@ -1,7 +1,7 @@
 const { mongoose } = require('mongoose');
 const { response } = require('express');
 const { Orden } = require('../models');
-//deploy
+///deploy
 const obtenerOrdenes = async (req, res = response) => {
 
     const { limite = 5, desde = 0 } = req.query;
