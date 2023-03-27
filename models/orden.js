@@ -21,6 +21,7 @@ const OrdenSchema = Schema({
         ref: 'Producto',
         required: true
     }],
+
     /* categoria: {
         type: Schema.Types.ObjectId,
         ref: 'Categoria',
