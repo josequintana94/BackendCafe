@@ -15,7 +15,12 @@ const OrdenSchema = Schema({
         type: Boolean,
         default: true,
         required: true
-    ,}
+    },
+    productos: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Producto',
+        required: true
+    }],
     /* categoria: {
         type: Schema.Types.ObjectId,
         ref: 'Categoria',

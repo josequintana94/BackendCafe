@@ -47,11 +47,8 @@ const crearOrden = async (req, res = response) => {
     //const idOrden = new mongoose.Types.ObjectId();
 
     // Generar la data a guardar
-    const data = {
-        total: 119.99,
-    }
-
-    const orden = new Orden(data);
+    const body = req.body;
+    const orden = new Orden(body);
 
     console.log('orden a crear ' + orden);
     // Guardar DB
