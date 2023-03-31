@@ -22,6 +22,30 @@ const obtenerProductos = async(req, res = response ) => {
     });
 }
 
+const obtenerProductosPorUsuario = async(req, res = response ) => {
+
+    const { limite = 5, desde = 0 } = req.query;
+    const { idUsuario } = req.body;
+
+    const query = { 'usuario': idUsuario};
+    const countDocumentsQuery = { estado: true };
+    
+    console.log("iduser " + idUsuario);
+    const [ total, productos ] = await Promise.all([
+        Producto.countDocuments(countDocumentsQuery),
+        Producto.find(query)
+            .populate('usuario', 'nombre')
+            .populate('categoria', 'nombre')
+            .skip( Number( desde ) )
+            .limit(Number( limite ))
+    ]);
+
+    res.json({
+        total,
+        productos
+    });
+}
+
 const obtenerProducto = async(req, res = response ) => {
 
     const { id } = req.params;
@@ -104,5 +128,6 @@ module.exports = {
     obtenerProductos,
     obtenerProducto,
     actualizarProducto,
-    borrarProducto
+    borrarProducto,
+    obtenerProductosPorUsuario
 }

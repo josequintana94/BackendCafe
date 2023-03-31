@@ -7,7 +7,8 @@ const { crearProducto,
         obtenerProductos,
         obtenerProducto,
         actualizarProducto, 
-        borrarProducto } = require('../controllers/productos');
+        borrarProducto,
+        obtenerProductosPorUsuario } = require('../controllers/productos');
 
 const { existeCategoriaPorId, existeProductoPorId } = require('../helpers/db-validators');
 
@@ -26,6 +27,11 @@ router.get('/:id',[
     check('id').custom( existeProductoPorId ),
     validarCampos,
 ], obtenerProducto );
+
+router.post('/getProductosPorUsuario',[
+    check('idUsuario', 'El idUsuario es obligatorio').not().isEmpty(),
+    validarCampos
+], obtenerProductosPorUsuario );
 
 // Crear categoria - privado - cualquier persona con un token válido
 router.post('/', [ 
