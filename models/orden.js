@@ -11,6 +11,10 @@ const OrdenSchema = Schema({
         type: Number,
         default: 0
     },
+    fecha: {
+        type: Date,
+        default: Date.now
+    },
     activo: {
         type: Boolean,
         default: true,
