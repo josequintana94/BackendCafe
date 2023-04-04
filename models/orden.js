@@ -29,11 +29,11 @@ const OrdenSchema = Schema({
         ref: 'Usuario',
         required: true
     },
-    /* metodoPago: {
-        type: Schema.Types.ObjectId,
-        ref: 'Categoria',
+    metodoPago: {
+        type: Object,
+        ref: 'metodoPago',
         required: true
-    }, */
+    },
 });
 
 
