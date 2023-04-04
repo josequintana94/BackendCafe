@@ -21,15 +21,14 @@ const obtenerOrdenes = async (req, res = response) => {
     });
 }
 
-/* const obtenerCategoria = async(req, res = response ) => {
+const obtenerOrden = async (req, res = response) => {
 
     const { id } = req.params;
-    const categoria = await Categoria.findById( id )
-                            .populate('usuario', 'nombre');
+    const categoria = await Orden.findById(id)
+        .populate('idOrden', 'total');
 
-    res.json( categoria );
-
-} */
+    res.json(categoria);
+}
 
 const crearOrden = async (req, res = response) => {
 
@@ -59,33 +58,8 @@ const crearOrden = async (req, res = response) => {
 
 }
 
-/* const actualizarCategoria = async (req, res = response) => {
-
-    const { id } = req.params;
-    const { estado, usuario, ...data } = req.body;
-
-    data.nombre = data.nombre.toUpperCase();
-    data.usuario = req.usuario._id;
-
-    const categoria = await Categoria.findByIdAndUpdate(id, data, { new: true });
-
-    res.json(categoria);
-
-}
-
-const borrarCategoria = async (req, res = response) => {
-
-    const { id } = req.params;
-    const categoriaBorrada = await Categoria.findByIdAndUpdate(id, { estado: false }, { new: true });
-
-    res.json(categoriaBorrada);
-} */
-
-
 module.exports = {
     crearOrden,
     obtenerOrdenes,
-    //obtenerCategoria,
-    //actualizarCategoria,
-    //borrarCategoria
+    obtenerOrden
 }
