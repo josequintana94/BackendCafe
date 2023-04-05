@@ -25,7 +25,7 @@ const obtenerOrden = async (req, res = response) => {
 
     const { id } = req.params;
     const categoria = await Orden.findById(id)
-        .populate('idOrden', 'total');
+        .populate('productos');
 
     res.json(categoria);
 }
