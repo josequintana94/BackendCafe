@@ -19,6 +19,11 @@ const OrdenSchema = Schema({
         ref: 'Producto',
         required: true
     }],
+    carrito: {
+        type: Object,
+        ref: 'Carrito',
+        required: true
+    },
     usuarioComprador: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
