@@ -1,6 +1,6 @@
 const { response } = require('express');
 const { Categoria } = require('../models');
-
+const { Producto } = require('../models');
 
 const obtenerCategorias = async(req, res = response ) => {
 
@@ -67,6 +67,9 @@ const actualizarCategoria = async( req, res = response ) => {
     data.usuario = req.usuario._id;
 
     const categoria = await Categoria.findByIdAndUpdate(id, data, { new: true });
+
+    // Update all products that have this category
+    await Producto.updateMany({ categoria: id }, { categoria: categoria });
 
     res.json( categoria );
 
