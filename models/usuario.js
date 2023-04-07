@@ -32,6 +32,10 @@ const UsuarioSchema = Schema({
         type: Boolean,
         default: false
     },
+    recoveryPassword: {
+        type: Object,
+        default: null
+    }
 });
 
 
