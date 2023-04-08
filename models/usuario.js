@@ -35,15 +35,43 @@ const UsuarioSchema = Schema({
     recoveryPassword: {
         type: Object,
         default: null
-    }
+    },
+    storeName: {
+        type: String,
+        default: null
+    },
+    storeDescription: {
+        type: String,
+        default: null
+    },
+    storeImage: {
+        type: String,
+        default: null
+    },
+    storeAddress: {
+        type: String,
+        default: null
+    },
+    storePhone: {
+        type: String,
+        default: null
+    },
+    storeEmail: {
+        type: String,
+        default: null
+    },
+    storeUrl: {
+        type: String,
+        default: null
+    },
 });
 
 
 
-UsuarioSchema.methods.toJSON = function() {
-    const { __v, password, _id, ...usuario  } = this.toObject();
+UsuarioSchema.methods.toJSON = function () {
+    const { __v, password, _id, ...usuario } = this.toObject();
     usuario.uid = _id;
     return usuario;
 }
 
-module.exports = model( 'Usuario', UsuarioSchema );
+module.exports = model('Usuario', UsuarioSchema);
