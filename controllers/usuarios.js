@@ -54,7 +54,7 @@ const usuariosPost = async (req, res = response) => {
         token
     });
 }
-
+ 
 const usuariosPut = async (req, res = response) => {
 
     const { id } = req.params;
