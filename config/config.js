@@ -1,4 +1,9 @@
 const config = {
+  isProduction: process.env.NODE_ENV === 'production',
+  port: process.env.PORT,
+  cloudinary: {
+    url: process.env.CLOUDINARY_URL,
+  },
   nodemailer: {
     email: process.env.NODEMAILER_EMAIL,
     password: process.env.NODEMAILER_PASSWORD,
