@@ -65,10 +65,14 @@ const enviarFactura = async (req, res = response) => {
   try {
     const orden = await Orden.findById(id);
 
+    console.log('orden', orden);
+    console.log('req', req.body);
+
     const mailOptions = {
       subject: `Ticket de la orden n°:${orden._id}`,
       html: `<h1>Ticket</h1>
                 <hr>
+                <div>
                 ${orden.productos.map((producto) => {
                   return `<div style='display: flex; align-items: center; gap: 20px'>
                             <p>Producto: ${producto.nombre}</p>
@@ -77,6 +81,7 @@ const enviarFactura = async (req, res = response) => {
                             <pre>Subtotal: $${producto.subtotal}</pre>
                             <hr>`;
                 })}
+                </div>
                 <hr>
                 <p>Total: <b><pre>${orden.total}</pre></b></p>
             `,
