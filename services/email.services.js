@@ -31,8 +31,21 @@ const sendEmail = async (token, email) => {
   return result;
 };
 
+// buscar en la base con el code
+const findUserByCode = async (code) => {
+  const user = await Usuario.findOne({ 'recoveryPassword.token': code });
+  return user;
+}
+
+// buscar el usuario de la base por el token de seguridad
+const findUserByToken = async (token) => {
+  const user = await Usuario.findOne({ 'recoveryPassword.tokenUpdatePassword': token });
+  return user;
+}
 
 module.exports = {
   findUserByEmail,
-  sendEmail
+  sendEmail,
+  findUserByCode,
+  findUserByToken
 };
