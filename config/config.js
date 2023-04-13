@@ -11,5 +11,9 @@ const config = {
     host: process.env.NODEMAILER_HOST,
     port: process.env.NODEMAILER_PORT,
   },
+  crypto: {
+    aesIv: process.env.AES_IV,
+    aesSecret: process.env.AES_SECRET,
+  }
 };
 module.exports = config;

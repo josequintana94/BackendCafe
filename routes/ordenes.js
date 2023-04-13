@@ -6,6 +6,7 @@ const { validarJWT } = require('../middlewares');
 const { crearOrden,
     obtenerOrdenes,
     obtenerOrden,
+    obtenerOrdenesPorUsuario
 } = require('../controllers/ordenes');
 
 //const { existeCategoriaPorId } = require('../helpers/db-validators');
@@ -29,5 +30,9 @@ router.post('/', [
     validarJWT,
     check('total', 'El total es obligatorio').not().isEmpty(),
 ], crearOrden);
+
+router.post('/getOrdenesPorUsuario',[
+    check('idUsuario', 'El idUsuario es obligatorio').not().isEmpty(),
+], obtenerOrdenesPorUsuario );
 
 module.exports = router;

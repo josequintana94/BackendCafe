@@ -1,10 +1,10 @@
 const { mongoose } = require('mongoose');
 const { response } = require('express');
 const { Orden } = require('../models');
-//deploy
+
 const obtenerOrdenes = async (req, res = response) => {
 
-    const { limite = 5, desde = 0 } = req.query;
+    const { limite = 500, desde = 0 } = req.query;
     const query = { activo: true };
 
     const [total, ordenes] = await Promise.all([
@@ -13,6 +13,28 @@ const obtenerOrdenes = async (req, res = response) => {
             .populate('idOrden', 'total')
             .skip(Number(desde))
             .limit(Number(limite))
+    ]);
+
+    res.json({
+        total,
+        ordenes
+    });
+}
+
+const obtenerOrdenesPorUsuario = async(req, res = response ) => {
+
+    const { limite = 500, desde = 0 } = req.query;
+    const { idUsuario } = req.body;
+
+    const query = { 'usuarioVendedor': idUsuario};
+    const countDocumentsQuery = { activo: true };
+    
+    console.log("iduser " + idUsuario);
+    const [ total, ordenes ] = await Promise.all([
+        Orden.countDocuments(countDocumentsQuery),
+        Orden.find(query)
+            .skip( Number( desde ) )
+            .limit(Number( limite ))
     ]);
 
     res.json({
@@ -32,19 +54,6 @@ const obtenerOrden = async (req, res = response) => {
 
 const crearOrden = async (req, res = response) => {
 
-    /*  const idOrden = req.body.nombre.toUpperCase();
- 
-     const categoriaDB = await Categoria.findOne({ nombre });
- 
-     if ( categoriaDB ) {
-         return res.status(400).json({
-             msg: `La categoria ${ categoriaDB.nombre }, ya existe`
-         });
-     } */
-
-    //create unique mongodb id
-    //const idOrden = new mongoose.Types.ObjectId();
-
     // Generar la data a guardar
     const body = req.body;
     const orden = new Orden(body);
@@ -61,5 +70,6 @@ const crearOrden = async (req, res = response) => {
 module.exports = {
     crearOrden,
     obtenerOrdenes,
-    obtenerOrden
+    obtenerOrden,
+    obtenerOrdenesPorUsuario
 }
