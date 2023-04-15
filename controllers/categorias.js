@@ -30,7 +30,7 @@ const obtenerCategoriasPorUsuario = async(req, res = response ) => {
     const countDocumentsQuery = { estado: true };
     
     console.log("iduser " + idUsuario);
-    const [ total, productos ] = await Promise.all([
+    const [ total, categorias ] = await Promise.all([
         Categoria.countDocuments(countDocumentsQuery),
         Categoria.find(query)
             .populate('usuario', 'nombre')
@@ -40,7 +40,7 @@ const obtenerCategoriasPorUsuario = async(req, res = response ) => {
 
     res.json({
         total,
-        productos
+        categorias
     });
 }
 
