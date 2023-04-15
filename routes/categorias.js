@@ -7,7 +7,9 @@ const { crearCategoria,
         obtenerCategorias,
         obtenerCategoria,
         actualizarCategoria, 
-        borrarCategoria } = require('../controllers/categorias');
+        borrarCategoria,
+        obtenerCategoriasPorUsuario
+    } = require('../controllers/categorias');
 const { existeCategoriaPorId } = require('../helpers/db-validators');
 
 const router = Router();
@@ -18,6 +20,11 @@ const router = Router();
 
 //  Obtener todas las categorias - publico
 router.get('/', obtenerCategorias );
+
+router.post('/getCategoriasPorUsuario',[
+    check('idUsuario', 'El idUsuario es obligatorio').not().isEmpty(),
+    validarCampos
+], obtenerCategoriasPorUsuario );
 
 // Obtener una categoria por id - publico
 router.get('/:id',[
