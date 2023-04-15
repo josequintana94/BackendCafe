@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs');
 
 
 const Usuario = require('../models/usuario');
+const Categoria = require('../models/categoria');
 const { generarJWT } = require('../helpers');
 
 
@@ -48,6 +49,10 @@ const usuariosPost = async (req, res = response) => {
 
     // Generar el JWT
     const token = await generarJWT(usuario.id);
+
+    //create a default Categoria
+    const categoria = new Categoria({ nombre: 'Varios', usuario: usuario.id });
+    await categoria.save();
 
     res.json({
         usuario,
