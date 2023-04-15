@@ -39,6 +39,15 @@ const existeCategoriaPorId = async( id ) => {
     }
 }
 
+const existeAlMenosUnaCategoria = async( id ) => {
+
+    // check if there is at least one category
+    const existeAlMenosUnaCategoria = await Categoria.countDocuments();
+    if ( existeAlMenosUnaCategoria === 0 ) {
+        throw new Error(`Debe crear al menos una categoria`);
+    }
+}
+
 /**
  * Productos
  */
@@ -70,6 +79,7 @@ module.exports = {
     existeUsuarioPorId,
     existeCategoriaPorId,
     existeProductoPorId,
-    coleccionesPermitidas
+    coleccionesPermitidas,
+    existeAlMenosUnaCategoria
 }
 
