@@ -64,6 +64,10 @@ const UsuarioSchema = Schema({
         type: String,
         default: null
     },
+    pushToken: {
+        type: String,
+        default: null
+    },
 });
 
 
