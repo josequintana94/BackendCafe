@@ -66,7 +66,7 @@ const crearOrden = async (req, res = response) => {
     message: {
       to: {
         expo: {
-          token: sellerUserPushToken,
+          token: 'ExponentPushToken[FAPkYBHwthFnylJzfFvufC]',
         },
       },
       template: "32JRQY1RYNMKYYK5E0J0Y448Y6KC",
