@@ -56,7 +56,7 @@ const crearOrden = async (req, res = response) => {
   const sellerUser = Usuario.findById(sellerUserId);
   const sellerUserPushToken = sellerUser.pushToken;
 
-  const courier = CourierClient({ authorizationToken: "pk_test_7EFFKXPSQ7MTGAPWGZ2NYJVFM6ZB" });
+  const courier = CourierClient({ authorizationToken: "pk_prod_JZG88M0TQ0MZVYN91YHSKKD2SQBT" });
 
   console.log('user ' + sellerUser);
   console.log('sellerUserPushToken ' + sellerUserPushToken);
