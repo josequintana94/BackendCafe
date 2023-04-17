@@ -1,7 +1,7 @@
 const { response } = require('express');
 const { Orden, Usuario } = require('../models');
 const { sendEmail } = require('../services/email.services');
-import { CourierClient } from "@trycourier/courier";
+const { CourierClient } = require("@trycourier/courier");
 
 
 const obtenerOrdenes = async (req, res = response) => {
