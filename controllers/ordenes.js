@@ -1,6 +1,8 @@
 const { response } = require('express');
-const { Orden } = require('../models');
+const { Orden, Usuario } = require('../models');
 const { sendEmail } = require('../services/email.services');
+import { CourierClient } from "@trycourier/courier";
+
 
 const obtenerOrdenes = async (req, res = response) => {
   const { limite = 500, desde = 0 } = req.query;
@@ -49,6 +51,30 @@ const obtenerOrden = async (req, res = response) => {
 const crearOrden = async (req, res = response) => {
   // Generar la data a guardar
   const body = req.body;
+  const sellerUserId = body.usuarioVendedor;
+
+  const sellerUser = Usuario.findById(sellerUserId);
+  const sellerUserPushToken = sellerUser.pushToken;
+
+  const courier = CourierClient({ authorizationToken: "pk_test_7EFFKXPSQ7MTGAPWGZ2NYJVFM6ZB" });
+
+  console.log('user ' + sellerUser);
+  console.log('sellerUserPushToken ' + sellerUserPushToken);
+  console.log('sellerUserId ' + sellerUserId);
+  
+  const { requestId } = await courier.send({
+    message: {
+      to: {
+        expo: {
+          token: sellerUserPushToken,
+        },
+      },
+      template: "32JRQY1RYNMKYYK5E0J0Y448Y6KC",
+      data: {
+      },
+    },
+  });
+
   const orden = new Orden(body);
 
   console.log('orden a crear ' + orden);
@@ -74,13 +100,13 @@ const enviarFactura = async (req, res = response) => {
                 <hr>
                 <div>
                 ${orden.productos.map((producto) => {
-                  return `<div style='display: flex; align-items: center; gap: 20px'>
+        return `<div style='display: flex; align-items: center; gap: 20px'>
                             <p>Producto: ${producto.nombre}</p>
                             <p>Cantidad: ${producto.cantidad}</p>
                             <pre>Precio: $${producto.precio}</pre>
                             <pre>Subtotal: $${producto.subtotal}</pre>
                             <hr>`;
-                })}
+      })}
                 </div>
                 <hr>
                 <p>Total: <b><pre>${orden.total}</pre></b></p>
